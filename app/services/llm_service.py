@@ -17,14 +17,23 @@ def _build_prompt(req: BudgetAnalysisRequest) -> str:
     ]
     total = sum(c.amount for c in req.categories)
     for cat in req.categories:
+        label = f"{cat.code}. " if cat.code else ""
         lines.append(
-            f"- {cat.name}: {req.currency or 'USD'} {cat.amount:,.2f} ({cat.percentage:.1f}%)"
+            f"- {label}{cat.name}: {req.currency or 'USD'} {cat.amount:,.2f} ({cat.percentage:.1f}%)"
         )
     lines.append(f"\nTotal: {req.currency or 'USD'} {total:,.2f}")
-    if req.projectType:
-        lines.append(f"\nProject type: {req.projectType}")
+    if req.project_name:
+        lines.append(f"\nProject: {req.project_name}")
+    if req.projectType or req.project_type:
+        lines.append(f"Project type: {req.projectType or req.project_type}")
     if req.location:
         lines.append(f"Location: {req.location}")
+    if req.shoot_days:
+        lines.append(f"Shoot days: {req.shoot_days}")
+    if req.grand_total is not None:
+        lines.append(f"Grand total: {req.currency or 'USD'} {req.grand_total:,.2f}")
+    if req.health_score is not None:
+        lines.append(f"Health score: {req.health_score}")
     if req.unionStatus:
         lines.append(f"Union status: {req.unionStatus}")
     lines.append(
