@@ -16,5 +16,5 @@ services:
         value: sqlite:///./budgethive.db
       - key: CORS_ORIGINS
         sync: false
-      - key: OPENAI_API_KEY
-        sync: false
+      - key: GEMINI_API_KEY
+        sync: false  # Required for POST /api/budget-analysis
