@@ -21,10 +21,10 @@ def post_budget_analysis(body: BudgetAnalysisRequest):
         return analyze_budget(body)
     except ValueError as e:
         msg = str(e)
-        if "OPENAI_API_KEY" in msg or "not set" in msg:
+        if "GEMINI_API_KEY" in msg or "not set" in msg:
             raise HTTPException(
                 status_code=500,
-                detail="OpenAI API key is not configured. Set OPENAI_API_KEY.",
+                detail="Gemini API key is not configured. Set GEMINI_API_KEY.",
             )
         if "Invalid JSON" in msg or "Empty response" in msg:
             raise HTTPException(
