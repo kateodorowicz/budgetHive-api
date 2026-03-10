@@ -13,8 +13,13 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "sqlite:///./budgethive.db"
 
-    # CORS - allow React frontend (Lovable)
-    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173"
+    # CORS - Lovable frontends + local dev (comma-separated)
+    CORS_ORIGINS: str = (
+        "https://id-preview--f6c3af41-2411-4739-a405-f5ac8a6af75e.lovable.app,"
+        "https://film-budget-voice.lovable.app,"
+        "https://f6c3af41-2411-4739-a405-f5ac8a6af75e.lovableproject.com,"
+        "http://localhost:3000,http://localhost:5173"
+    )
 
     # Google Gemini for budget analysis
     GEMINI_API_KEY: str = ""
