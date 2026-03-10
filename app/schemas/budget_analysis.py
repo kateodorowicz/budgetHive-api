@@ -38,3 +38,11 @@ class BudgetAnalysisRequest(BaseModel):
         if self.projectType is None and self.project_type is not None:
             object.__setattr__(self, "projectType", self.project_type)
         return self
+
+
+class BudgetAnalysisResponse(BaseModel):
+    """LLM analysis response - compatible with Lovable frontend."""
+
+    narrative: str
+    risks: list[str]
+    recommendations: list[str]
