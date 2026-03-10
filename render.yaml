@@ -1,0 +1,19 @@
+# Render Blueprint - https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: budgethive-api
+    runtime: python
+    region: oregon
+
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        value: sqlite:///./budgethive.db
+      - key: CORS_ORIGINS
+        sync: false  # Set: https://your-frontend.onrender.com
+      - key: OPENAI_API_KEY
+        sync: false  # Required for /api/budget-analysis
